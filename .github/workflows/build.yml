@@ -1,0 +1,56 @@
+name: build-cv
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: xu-cheng/latex-action@v2
+        with:
+          root_file: src/main.tex
+          latexmk_use_xelatex: true
+          work_in_root_file_dir: true
+          extra_system_packages: "fontconfig"
+          pre_compile: |
+            tlmgr update --self || true
+            tlmgr install latexmk xetex fontspec fontawesome5 tikz pgf
+          output_directory: dist
+
+      - name: Rename PDF
+        run: |
+          mv dist/main.pdf dist/vicent-perez-cv.pdf
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CV
+          path: dist/vicent-perez-cv.pdf
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download PDF artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: CV
+          path: dist/
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          vercel-args: "--prod"
