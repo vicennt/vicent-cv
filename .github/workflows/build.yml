@@ -20,12 +20,9 @@ jobs:
           extra_system_packages: "fontconfig"
           pre_compile: |
             tlmgr update --self || true
-            tlmgr install latexmk xetex fontspec fontawesome5 tikz pgf
+            tlmgr install latexmk xetex fontspec fontawesome5 pgf
           output_directory: dist
-
-      - name: Rename PDF
-        run: |
-          mv dist/main.pdf dist/vicent-perez-cv.pdf
+          output_file: vicent-perez-cv.pdf
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
