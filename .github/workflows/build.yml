@@ -16,13 +16,17 @@ jobs:
         with:
           root_file: src/main.tex
           latexmk_use_xelatex: true
+          work_in_root_file_dir: true
           extra_system_packages: "fontconfig"
           pre_compile: |
             tlmgr update --self || true
             tlmgr install latexmk xetex fontspec fontawesome5 pgf
-          output_directory: dist
-          output_file: vicent-perez-cv.pdf
           continue_on_error: false
+
+      - name: Create dist directory and move PDF
+        run: |
+          mkdir -p dist
+          mv src/main.pdf dist/vicent-perez-cv.pdf
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
