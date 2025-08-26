@@ -16,18 +16,18 @@ jobs:
         with:
           root_file: src/main.tex
           latexmk_use_xelatex: true
-          work_in_root_file_dir: true
           extra_system_packages: "fontconfig"
           pre_compile: |
             tlmgr update --self || true
             tlmgr install latexmk xetex fontspec fontawesome5 pgf
           output_directory: dist
           output_file: vicent-perez-cv.pdf
+          continue_on_error: false
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
-          name: CV
+          name: vicent-perez-cv
           path: dist/vicent-perez-cv.pdf
 
   deploy:
@@ -40,14 +40,5 @@ jobs:
       - name: Download PDF artifact
         uses: actions/download-artifact@v4
         with:
-          name: CV
+          name: vicent-perez-cv
           path: dist/
-
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./
-          vercel-args: "--prod"
