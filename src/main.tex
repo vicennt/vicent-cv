@@ -11,18 +11,20 @@
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{parskip}
+\usepackage{ragged2e}
 \usepackage{setspace}
 \usepackage{tikz}
 
-% Professional color scheme - darker for better readability
-\definecolor{primary}{HTML}{0f1419}
-\definecolor{secondary}{HTML}{1f2937}
-\definecolor{accent}{HTML}{1e40af}
-\definecolor{text}{HTML}{1f2937}
-\definecolor{lightgray}{HTML}{f3f4f6}
-\definecolor{company}{HTML}{991b1b}
-\definecolor{role}{HTML}{991b1b}
-\definecolor{burgundy}{HTML}{991b1b}
+% Professional color scheme - CV appropriate
+\definecolor{primary}{HTML}{1a365d}
+\definecolor{secondary}{HTML}{2d3748}
+\definecolor{accent}{HTML}{3182ce}
+\definecolor{text}{HTML}{2d3748}
+\definecolor{lightgray}{HTML}{f7fafc}
+\definecolor{company}{HTML}{1a365d}
+\definecolor{role}{HTML}{4a5568}
+\definecolor{date}{HTML}{718096}
+\definecolor{sectionbg}{HTML}{f7fafc}
 
 % Hyperref setup
 \hypersetup{
@@ -37,11 +39,11 @@
 \fancyhf{}
 \fancyfoot[C]{\thepage\ of \pageref{LastPage}}
 \renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0.4pt}
-\renewcommand{\footrule}{\hbox to\headwidth{\color{primary}\leaders\hrule height \footrulewidth\hfill}}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{20pt}
 
-% Title formatting
-\titleformat{\section}{\Large\bfseries\color{primary}}{}{0em}{}[\titlerule]
+% Title formatting - improved visual hierarchy
+\titleformat{\section}{\Large\bfseries\color{primary}}{}{0em}{}
 \titleformat{\subsection}{\large\bfseries\color{secondary}}{}{0em}{}
 \titlespacing{\section}{0pt}{6pt}{3pt}
 \titlespacing{\subsection}{0pt}{4pt}{2pt}
@@ -49,8 +51,8 @@
 % Custom commands
 \newcommand{\header}[2]{
     \begin{center}
-        {\Huge\bfseries\color{primary}#1}\\[0.2em]
-        {\Large\color{secondary}#2}\\[0.5em]
+        {\Huge\bfseries\color{primary}#1}\\[0.8em]
+        {\Large\color{secondary}#2}\\[1.8em]
     \end{center}
 }
 
@@ -60,26 +62,25 @@
             #1
         \end{tabular}
     \end{center}
-    \vspace{0.3em}
+    \vspace{0.6em}
 }
 
 \newcommand{\experience}[4]{
-    \vspace{0.2em}
-    \textbf{\large\color{company}#1} \hfill \textbf{\color{burgundy}#2}\\
-    \textbf{\color{role}#3} \hfill \textbf{\color{burgundy}#4}\\
-    \vspace{0.1em}
+    \textbf{\large\color{company}#1} \hfill \textbf{\color{date}#2}\\
+    \textbf{\color{role}#3} \hfill \textbf{\color{date}#4}\\
+    \vspace{0.3em}
 }
 
 \newcommand{\education}[5]{
-    \textbf{\large\color{primary}#1} \hfill \textit{#2}\\
-    \textbf{\color{secondary}#3} \hfill \textit{#4}\\
+    \textbf{\large\color{primary}#1} \hfill \textbf{\color{date}#2}\\
+    \textbf{\color{secondary}#3} \hfill \textbf{\color{date}#4}\\
     \textit{\color{accent}#5}
 }
 
 \newcommand{\badges}[1]{
     \vspace{0.1em}
     \begin{center}
-        \small\color{accent}#1
+        \small\bfseries\color{accent}#1
     \end{center}
     \vspace{0.1em}
 }
@@ -92,54 +93,53 @@
 
 % Document begins
 \begin{document}
+\justifying
 
 % Header
 \header{Vicent Pérez}{Software Engineer · Cloud Architect · AI Enthusiast}
 
 % Contact Information
 \contactinfo{
-    \faEnvelope\ vicent@ginslabs.com & 
+    \faEnvelope\ \href{mailto:vicent@ginslabs.com}{vicent@ginslabs.com} & 
     \faLinkedin\ \href{https://linkedin.com/in/vicennt}{linkedin.com/in/vicennt} & 
     \faGithub\ \href{https://github.com/vicentperez}{github.com/vicentperez} & 
     \faGlobe\ \href{https://vicentperez.com}{vicentperez.com}
 }
 
 % Executive Summary
-\section{Resumen Ejecutivo}
-Todo empezó cuando, con 9 años, mis padres me apuntaron a clases de informática. Mientras otros jugaban al fútbol, yo disfrutaba trasteando con el ordenador y descubriendo el mundo de la programación.
+\begin{raggedright}
+Software Engineer con más de 10 años de experiencia. Mi pasión por la tecnología empezó a los 9 años, cuando mis padres me apuntaron a clases de informática. Mientras otros jugaban al fútbol, yo pasaba horas delante del ordenador, descubriendo el mundo de la programación y alucinando con todo lo que se podía crear con unas pocas líneas de código.
 
-Hoy tengo la suerte de dedicarme a lo que realmente me motiva: el diseño y la implementación de sistemas escalables y eficientes. He trabajado en consultoría y startups, liderando equipos en proyectos internacionales (ES/NL/UK). Hace un año decidí dar el salto al freelancing, colaborando con startups y empresas para transformar ideas en productos reales. Cuento con tres certificaciones AWS.
+He trabajado en consultoría y startups, liderando equipos técnicos y desarrollando soluciones desde cero. Actualmente como freelance, ayudo a empresas a transformar sus ideas en productos reales, diseñando arquitecturas escalables, automatizando procesos y aplicando las mejores prácticas de desarrollo. 
+\end{raggedright}
 
 % Professional Experience
 \section{Experiencia Profesional}
 
 \experience{Freelance}{May 2024 -- Presente}{Software Engineer \& Cloud Architect}{Remoto (ES/NL)}
-\vspace{0.1em}
 \begin{itemize}[leftmargin=1em, itemsep=0.2em]
-    \achievement{\textbf{Arquitectura serverless en AWS} para gestión de eventos en tiendas Shopify: detección de fraude, facturación automática, traducción con LLMs $\rightarrow$ \textbf{-30\% costes} eliminando apps de terceros}
-    \achievement{\textbf{CI/CD e IaC (Terraform)} para estandarizar entornos $\rightarrow$ \textbf{-80\%} en tiempos de entrega y detección temprana de errores}
-    \achievement{\textbf{FinOps} aplicando optimización de costes en AWS: configuración de budgets, alertas y optimización de recursos}
-    \achievement{\textbf{SaaS de búsqueda semántica} basado en NLP, multi-tenant y API-first $\rightarrow$ \textbf{+50\%} adopción de funcionalidades AI en productos de clientes}
-    \achievement{\textbf{Red privada de blogs} para agencia SEO: infraestructura automatizada, ofuscamiento, CRM personalizado y prompt registry $\rightarrow$ \textbf{-60\%} costes de creación de contenido}
-    \achievement{\textbf{Sistema de recolección de datos} en tiempo real para Universidad de Valencia $\rightarrow$ \textbf{+300\%} en obtención de muestras con dashboards instantáneos}
-    \achievement{Colaboración con agencias externas en desarrollo de aplicaciones web a medida, incorporando tecnologías cloud y serverless}
-\end{itemize}
-\badges{AWS · Serverless · Terraform · CI/CD · FinOps · NLP · LLMs · React · Node.js · Python}
+    \achievement{\textbf{Arquitectura cloud}: diseño e implementación de soluciones en AWS usando Lambda, EventBridge, SQS, DynamoDB, Step Functions, Cognito, ALB, ECS, RDS, API Gateway, etc.}
+    \achievement{\textbf{Desarrollo fullstack}: implementación de APIs REST con NestJS y TypeScript, aplicaciones web con React y Next.js, siguiendo patrones de arquitectura hexagonal, DDD y buenas prácticas de desarrollo.}
+    \achievement{\textbf{Infraestructura como código}: infra automatizada con Terraform, CI/CD con GitHub Actions. Tiempo de despliegue reducido de días a minutos}
+    \achievement{\textbf{Integración de AI/ML}: integración de LLMs en aplicaciones. Uso de IDEs y CLI (Claude Code) para incrementar la productividad y la calidaden el diseño y desarrollo de software.}
+    \achievement{\textbf{Gestión comercial y de clientes}: comunicación directa con clientes en España y Países Bajos, negociación de presupuestos y alcance de proyectos, asistencia a eventos del sector, partnerships con agencias de desarrollo.}
 
-\vspace{0.3em}
+\end{itemize}
+\badges{Leadership · AWS · Serverless · Terraform · TypeScript · React · Node.js · NestJS · LLMs · CI/CD }
+
+\vspace{0.5em}
 \experience{Capgemini}{Oct 2020 -- May 2024}{Tech Lead \& Cloud Engineer}{Valencia (Remoto/Híbrido)}
-\vspace{0.1em}
 \begin{itemize}[leftmargin=1em, itemsep=0.2em]
-    \achievement{\textbf{Arquitectura cloud en AWS y liderazgo técnico} en el \textit{Digital Innovation Lab (PostNL)} $\rightarrow$ soluciones como \textbf{Fast Checkout} que redujeron tiempos de compra y aumentaron la conversión}
-    \achievement{\textbf{CI/CD e IaC} (Terraform, CodePipeline/Build/Deploy) $\rightarrow$ automatización multi-stage, \textbf{-80\%} en entrega y +fiabilidad en producción}
-    \achievement{Desarrollo \textbf{fullstack} en +6 proyectos (Node.js, React, Angular, NestJS, Next.js, PostgreSQL) $\rightarrow$ APIs, microservicios con foco en clean code/SOLID}
-    \achievement{\textbf{Gestión de equipo}: liderazgo de 5 devs, mentoría, entrevistas y workshops; impulso de buenas prácticas y adopción tecnológica}
+    \achievement{\textbf{Diseño y arquitectura cloud} en el \textit{Digital Innovation Lab (PostNL)}: diseño e implementación de soluciones como Fast Checkout, Webshop Profile, Business Portal y APIs que mejoraron la experiencia de compra y aumentaron la conversión}
+    \achievement{\textbf{Tech Lead y gestión de stakeholders}: liderazgo de equipo técnico, coordinación con product owners y stakeholders del cliente, planificación de sprints, definición de roadmaps técnicos y toma de decisiones arquitectónicas que alineaban objetivos de negocio con soluciones técnicas}
+    \achievement{\textbf{Infraestructura como Código y DevOps}: automatización con Terraform, pipelines CI/CD multi-stage, blue-green deployments.}
+    \achievement{\textbf{Desarrollo fullstack} en +6 proyectos: implementación de APIs REST con NestJS, aplicaciones web con React y Angular, bases de datos PostgreSQL, arquitecturas de microservicios y unit testing.}
+    \achievement{\textbf{Mentoría técnica}: mentoría a +8 desarrolladores junior/mid-level, realización de entrevistas técnicas, organización de workshops internos sobre buenas prácticas en el desarrollo.}
 \end{itemize}
 \badges{AWS · Terraform · CI/CD · Node.js · React · Angular · NestJS · Next.js · PostgreSQL · Docker}
 
 \vspace{0.3em}
 \experience{Alphasai}{Jul 2014 -- Sep 2016}{Freelance Software Engineer (Empr.)}{Valencia}
-\vspace{0.1em}
 \begin{itemize}[leftmargin=1em, itemsep=0.2em]
     \achievement{Desarrollo de \textbf{aplicaciones Android B2B} para gestión empresarial y automatización de procesos}
     \achievement{Implementación de \textbf{sistema de chat cifrado} utilizando SSH para comunicaciones seguras}
@@ -169,9 +169,9 @@ Hoy tengo la suerte de dedicarme a lo que realmente me motiva: el diseño y la i
 % Education
 \section{Educación}
 
-\education{Edinburgh Napier University}{2018 -- 2019}{Ingeniería de Informática}{Barcelona, España}{Honores: Artificial Intelligence, Software Engineering, Data Analytics}
+\education{Edinburgh Napier University}{2018 -- 2019}{MSc Computing (Ingeniería de Informática)}{Edimburgo, Reino Unido}{Honores: Artificial Intelligence, Software Engineering, Data Analytics}
 
-\education{Universidad Politécnica de Valencia}{2014 -- 2018}{Ingeniería de Informática}{Barcelona, España}{Honores: Algorítmica, Estructuras de Datos y Algoritmos, Sistemas Inteligentes, Lenguajes de Programación y Compiladores, Recuperación de la información}
+\education{Universidad Politécnica de Valencia}{2014 -- 2018}{Grado en Ingeniería Informática}{Valencia, España}{Honores: Algorítmica, Estructuras de Datos y Algoritmos, Sistemas Inteligentes y Compiladores}
 
 \education{CIFP Batoi}{2012 -- 2014}{CFGS Desarrollo de Aplicaciones Multiplataforma}{Alcoy, España}{}
 
@@ -181,11 +181,11 @@ Hoy tengo la suerte de dedicarme a lo que realmente me motiva: el diseño y la i
 \section{Certificaciones}
 
 \begin{itemize}[leftmargin=1em, itemsep=0.3em]
-    \item \textbf{AWS Solutions Architect Professional} (2025--2028)
-    \item \textbf{AWS Solutions Architect Associate} (2025--2028)
-    \item \textbf{AWS Developer Associate} (2022--2025)
-    \item \textbf{AWS Generative AI Essentials} (2024--2027)
-    \item \textbf{Cambridge English: First (FCE) - B2}
+    \item \textbf{AWS Certified Solutions Architect -- Professional} \hfill {\color{accent}\faAws}
+    \item \textbf{AWS Certified Solutions Architect -- Associate} \hfill {\color{accent}\faAws}
+    \item \textbf{AWS Certified Developer -- Associate} \hfill {\color{accent}\faAws}
+    \item \textbf{AWS Generative AI Essentials} \hfill {\color{accent}\faAws}
+    \item \textbf{Cambridge English: First (FCE) -- Level B2} \hfill {\color{accent}\faGraduationCap}
 \end{itemize}
 
 \end{document}
